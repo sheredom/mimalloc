@@ -9,8 +9,8 @@ terms of the MIT license. A copy of the license can be found in the file
 #error "this file should be included from 'alloc.c' (so aliases can work)"
 #endif
 
-#if defined(MI_MALLOC_OVERRIDE) && defined(_WIN32) && !(defined(MI_SHARED_LIB) && defined(_DLL))
-#error "It is only possible to override "malloc" on Windows when building as a DLL (and linking the C runtime as a DLL)"
+#if defined(MI_MALLOC_OVERRIDE) && defined(_WIN32) && !((defined(MI_SHARED_LIB) && defined(_DLL) || defined(MI_STATIC_LIB) && !defined(_DLL)))
+#error "It is only possible to override "malloc" on Windows if the CRT used matches the MI_<SHARED|STATIC>_LIB define!"
 #endif
 
 #if defined(MI_MALLOC_OVERRIDE) && !(defined(_WIN32))
